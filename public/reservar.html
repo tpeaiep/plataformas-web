@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Médico - Reservar Hora</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Encabezado con logotipo y título centrado -->
+    <header>
+        <div class="logo">
+            <a href="/"> <!-- Enlace a la página principal -->
+                <img src="imagenes/logo.png" alt="Logo Centro Médico">
+            </a>
+            <div class="logo-texto">
+                <h1>Centro Médico - Reservar Hora</h1>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form id="reservaForm" action="/reservar" method="POST">
+            <label for="name">Nombre Completo:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="rut">Rut:</label>
+            <input type="text" id="rutInput" name="rut" placeholder="RUT" required />
+        
+            <label for="email">Correo Electronico:</label>
+            <input type="email" id="emailInput" name="email" placeholder="Correo Electrónico" required />
+        
+            <label for="doctor">Doctor:</label>
+            <select id="doctor" name="doctor" required>
+                <!-- Opciones de doctor se cargarán dinámicamente -->
+            </select>
+        
+            <button type="submit">Reservar</button>
+        </form>        
+    </main>
+
+    <!-- Pop-up de mensaje -->
+    <div id="popupBackground" style="display: none;">
+        <div id="popupMessage" class="popup-content"></div>
+    </div>
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evitar el envío predeterminado
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Validar campos vacíos
+            if (!data.name || !data.rut || !data.email || !data.doctor) {
+                alert("Todos los campos son obligatorios.");
+                return;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                if (result.success) {
+                    form.reset(); // Limpia el formulario si fue exitoso
+                }
+            } catch (error) {
+                console.error("Error al enviar la reserva:", error);
+                alert("Error al enviar la reserva.");
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

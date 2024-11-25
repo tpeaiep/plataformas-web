@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Médico - Verificación</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Encabezado con logotipo y título centrado -->
+    <header>
+        <div class="logo">
+            <a href="/"> <!-- Enlace a la página principal -->
+                <img src="imagenes/logo.png" alt="Logo Centro Médico">
+            </a>
+            <div class="logo-texto">
+                <h1>Centro Médico</h1>
+            </div>
+        </div>
+    </header>
+    
+
+    <main>
+        <!-- Formulario para la verificación del código -->
+        <section class="verificacion">
+            <h2>Verificación de Código</h2>
+            <form id="verifyCodeForm">
+                <label for="verificationCodeInput">Ingresa el código de verificación:</label>
+                <input type="text" id="verificationCodeInput" required>
+                <button type="submit">Verificar Código</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Contenedor de Pop-up -->
+    <div id="popupBackground" style="display: none;">
+        <div id="popupMessage" class="popup-content"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
